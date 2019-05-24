@@ -13,86 +13,51 @@ class App extends Component {
     message: "",
     buttonText: "Play",
     winners: [],
+    settings: {},
     field: undefined,
     delay: undefined,
     start: false,
-    disabled: false,
+    disabled: false
   };
 
   componentDidMount() {
+    this.getWinners();
+    axios
+      .get(`https://starnavi-frontend-test-task.herokuapp.com/game-settings`, {
+        crossdomain: true,
+        headers: { "Access-Control-Allow-Origin": "*" }
+      })
+      .then(res => {
+        const settings = res.data;
+        this.setState({ settings });
+      });
+  }
+
+  getWinners() {
     axios
       .get(`https://starnavi-frontend-test-task.herokuapp.com/winners`, {
-        credentials: "same-origin",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+        crossdomain: true,
+        headers: { "Access-Control-Allow-Origin": "*" }
       })
       .then(res => {
         const winners = res.data;
         this.setState({ winners });
       });
-    axios
-      .get(`https://starnavi-frontend-test-task.herokuapp.com/game-settings`, {
-        crossdomain: true,
-        headers: {'Access-Control-Allow-Origin': '*'},
-      })
-      .then(res => {
-        const settings = res.data;
-        console.log('settings', settings)
-        // this.setState({ winners });
-      });
   }
 
   onSubmit(e) {
     e.preventDefault();
-    const { userName, selectMode } = this.state;
+    const { userName, selectMode, settings } = this.state;
     if (userName !== "" && selectMode !== "") {
-      // axios.get(`https://starnavi-frontend-test-task.herokuapp.com/game-settings`, {
-      //   credentials: "same-origin",
-      //   headers: {
-      //     Accept: 'application/json',
-      //     'Content-Type': 'application/json',
-      //   }
-      // })
-      //   .then(res => {
-      //     const field = res.data;
-      //     this.setState({ field });
-      //     console.log('field', field);
-      //   })
-      // fetch('https://starnavi-frontend-test-task.herokuapp.com/game-settings', {
-      //   method: 'GET',
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json',
-      //   }
-      // })
-      // .then(response => response.json())
-      // .then(field => console.log('field', field));
-      const data = {
-        easyMode: {
-          field: 5,
-          delay: 2000
-        },
-        normalMode: {
-          field: 10,
-          delay: 1000
-        },
-        hardMode: {
-          field: 15,
-          delay: 500
-        }
-      };
-      for (let elem in data) {
+      for (let elem in settings) {
         if (elem === selectMode) {
-          const { field, delay } = data[elem];
+          const { field, delay } = settings[elem];
           this.setState({
             field,
             delay,
-            start: true ,
-            disabled: true ,
-            message: ''
+            start: true,
+            disabled: true,
+            message: ""
           });
         }
       }
@@ -107,13 +72,51 @@ class App extends Component {
     });
   };
 
-  showMessage = msg => {
+  showMessage = name => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const monthsNamed = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const formattedDate = `${hours}:${minutes}; ${day} ${
+      monthsNamed[month]
+    } ${year}`;
     this.setState({
-      message: msg,
+      message: `${name} won`,
       buttonText: "Play Again",
       start: false,
-      disabled: false,
+      disabled: false
     });
+    axios
+      .post(
+        `https://starnavi-frontend-test-task.herokuapp.com/winners`,
+        { winner: name, date: formattedDate },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+      )
+      .then(res => {
+        console.log(res);
+        this.getWinners();
+      });
   };
 
   render() {
@@ -154,11 +157,7 @@ class App extends Component {
                 />
               </Col>
               <Col md={2}>
-                <Button
-                  disabled={disabled}
-                >
-                  {buttonText}
-                </Button>
+                <Button disabled={disabled}>{buttonText}</Button>
               </Col>
             </Row>
           </Form>
@@ -171,9 +170,7 @@ class App extends Component {
           </Row>
           <Row>
             <Col>
-              {
-                ((field !== undefined) || (delay !== undefined))
-                ?
+              {field !== undefined || delay !== undefined ? (
                 <Game
                   field={field}
                   delay={delay}
@@ -181,9 +178,7 @@ class App extends Component {
                   onShowMessage={this.showMessage}
                   start={start}
                 />
-                :
-                null
-              }
+              ) : null}
             </Col>
           </Row>
           <Row>

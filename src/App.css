@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   padding-top: 10vmin;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .mainForm {

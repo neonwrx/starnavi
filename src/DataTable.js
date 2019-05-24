@@ -1,37 +1,35 @@
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import React, { PureComponent } from "react";
+import { Table } from "reactstrap";
+import PropTypes from "prop-types";
 
-class DataTable extends Component {
+class DataTable extends PureComponent {
   renderData() {
     const { winners } = this.props;
-    return (
-      winners.map((item) => {
-        const { winner, date, id } = item;
-        return(
-          <tr key={id}>
-            <td>{winner}</td>
-            <td>{date}</td>
-          </tr>
-        )
-      })
-    )
+    return winners.map(item => {
+      const { winner, date, id } = item;
+      return (
+        <tr key={id}>
+          <td>{winner}</td>
+          <td>{date}</td>
+        </tr>
+      );
+    });
   }
 
   render() {
-    console.log(this.props.winners);
-    return(
+    return (
       <div className="dataTable">
         <h2>Leader Board</h2>
         <Table bordered>
-          <tbody>
-            {
-              this.renderData()
-            }
-          </tbody>
+          <tbody>{this.renderData()}</tbody>
         </Table>
       </div>
-    )
+    );
   }
 }
+
+DataTable.propTypes = {
+  winners: PropTypes.array,
+};
 
 export default DataTable;

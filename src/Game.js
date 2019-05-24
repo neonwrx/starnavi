@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Game extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class Game extends Component {
     const finishGame = (name, color) => {
       clearInterval(this.intervalId);
       this.myRef[highlight].style.backgroundColor = color;
-      onShowMessage(`${name} won`);
+      onShowMessage(name);
     };
     if (computerScores >= halfSquares) {
       finishGame("Computer", "red");
@@ -126,5 +127,13 @@ class Game extends Component {
     );
   }
 }
+
+Game.propTypes = {
+  delay: PropTypes.number,
+  start: PropTypes.bool,
+  field: PropTypes.number,
+  userName: PropTypes.string,
+  onShowMessage: PropTypes.func
+};
 
 export default Game;

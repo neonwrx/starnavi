@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/starnavi/static/css/main.f44e72fa.chunk.css",
+    "main.js": "/starnavi/static/js/main.6a49125a.chunk.js",
+    "main.js.map": "/starnavi/static/js/main.6a49125a.chunk.js.map",
+    "runtime~main.js": "/starnavi/static/js/runtime~main.29db0d93.js",
+    "runtime~main.js.map": "/starnavi/static/js/runtime~main.29db0d93.js.map",
+    "static/css/2.266e55a5.chunk.css": "/starnavi/static/css/2.266e55a5.chunk.css",
+    "static/js/2.63d99022.chunk.js": "/starnavi/static/js/2.63d99022.chunk.js",
+    "static/js/2.63d99022.chunk.js.map": "/starnavi/static/js/2.63d99022.chunk.js.map",
+    "index.html": "/starnavi/index.html",
+    "precache-manifest.eb9943d2ec1757de91fa98c698bf8bd8.js": "/starnavi/precache-manifest.eb9943d2ec1757de91fa98c698bf8bd8.js",
+    "service-worker.js": "/starnavi/service-worker.js",
+    "static/css/2.266e55a5.chunk.css.map": "/starnavi/static/css/2.266e55a5.chunk.css.map",
+    "static/css/main.f44e72fa.chunk.css.map": "/starnavi/static/css/main.f44e72fa.chunk.css.map"
+  }
+}

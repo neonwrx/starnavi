@@ -6,13 +6,10 @@ class Game extends Component {
     super(props);
     this.myRef = [];
     this.state = {
-      squares: Array.from(
-        Array(props.field * props.field),
-        (x, index) => index
-      ),
+      squares: Array.from(Array(props.field ** 2), (x, index) => index),
       userScores: 0,
       computerScores: 0,
-      highlight: undefined,
+      highlight: null,
       clicked: false
     };
   }
@@ -25,12 +22,12 @@ class Game extends Component {
     if (start && start !== prevProps.start) {
       this.intervalId = setInterval(this.timer, delay);
       this.setState({
-        squares: Array.from(Array(field * field), (x, index) => index),
+        squares: Array.from(Array(field ** 2), (x, index) => index),
         computerScores: 0,
         userScores: 0,
-        highlight: undefined
+        highlight: null
       });
-      for (let i = 0; i < field * field; i++) {
+      for (let i = 0; i < field ** 2; i++) {
         this.myRef[i].style.backgroundColor = "white";
       }
     }
@@ -47,7 +44,7 @@ class Game extends Component {
       highlight
     } = this.state;
     const { field, userName, onShowMessage } = this.props;
-    const halfSquares = ((field * field) / 2).toFixed();
+    const halfSquares = (field ** 2 / 2).toFixed();
     const item = squares[Math.floor(Math.random() * squares.length)];
 
     const finishGame = (name, color) => {
@@ -61,7 +58,7 @@ class Game extends Component {
       finishGame(userName, "green");
     } else {
       this.myRef[item].style.backgroundColor = "blue";
-      for (var i = 0; i < squares.length; i++) {
+      for (const i of squares) {
         if (squares[i] === item) {
           squares.splice(i, 1);
         }
@@ -75,7 +72,7 @@ class Game extends Component {
         this.setState({
           computerScores: computerScores + 1
         });
-        if (highlight !== undefined) {
+        if (highlight) {
           this.myRef[highlight].style.backgroundColor = "red";
         }
       }
@@ -93,7 +90,7 @@ class Game extends Component {
     }
   }
   renderSquares(field) {
-    let squares = [...Array(field * field)];
+    let squares = [...Array(field ** 2)];
     return squares.map((item, index) => {
       return (
         <div

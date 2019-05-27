@@ -14,8 +14,8 @@ class App extends Component {
     buttonText: "Play",
     winners: [],
     settings: {},
-    field: undefined,
-    delay: undefined,
+    field: null,
+    delay: null,
     start: false,
     disabled: false
   };
@@ -104,7 +104,7 @@ class App extends Component {
     });
     axios
       .post(
-        `https://starnavi-frontend-test-task.herokuapp.com/winners`,
+        `https://12starnavi-frontend-test-task.herokuapp.com/winners`,
         { winner: name, date: formattedDate },
         {
           headers: {
@@ -164,13 +164,13 @@ class App extends Component {
           <Row>
             <Col>
               <div className="message">
-                {message.length ? <h3>{message}</h3> : null}
+                {message.length > 0 && <h3>{message}</h3>}
               </div>
             </Col>
           </Row>
           <Row>
             <Col>
-              {field !== undefined || delay !== undefined ? (
+              {(field || delay) && (
                 <Game
                   field={field}
                   delay={delay}
@@ -178,7 +178,7 @@ class App extends Component {
                   onShowMessage={this.showMessage}
                   start={start}
                 />
-              ) : null}
+              )}
             </Col>
           </Row>
           <Row>

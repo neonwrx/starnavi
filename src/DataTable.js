@@ -1,10 +1,9 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { Table } from "reactstrap";
 import PropTypes from "prop-types";
 
-class DataTable extends PureComponent {
-  renderData() {
-    const { winners } = this.props;
+const DataTable = React.memo(({ winners }) => {
+  const renderData = () => {
     return winners.map(item => {
       const { winner, date, id } = item;
       return (
@@ -14,22 +13,19 @@ class DataTable extends PureComponent {
         </tr>
       );
     });
-  }
-
-  render() {
-    return (
-      <div className="dataTable">
-        <h2>Leader Board</h2>
-        <Table bordered>
-          <tbody>{this.renderData()}</tbody>
-        </Table>
-      </div>
-    );
-  }
-}
+  };
+  return (
+    <div className="dataTable">
+      <h2>Leader Board</h2>
+      <Table bordered>
+        <tbody>{renderData()}</tbody>
+      </Table>
+    </div>
+  );
+});
 
 DataTable.propTypes = {
-  winners: PropTypes.array,
+  winners: PropTypes.array
 };
 
 export default DataTable;

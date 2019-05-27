@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/starnavi/static/css/main.d231dc96.chunk.css",
-    "main.js": "/starnavi/static/js/main.4b7818f4.chunk.js",
-    "main.js.map": "/starnavi/static/js/main.4b7818f4.chunk.js.map",
+    "main.js": "/starnavi/static/js/main.c1e74a46.chunk.js",
+    "main.js.map": "/starnavi/static/js/main.c1e74a46.chunk.js.map",
     "runtime~main.js": "/starnavi/static/js/runtime~main.29db0d93.js",
     "runtime~main.js.map": "/starnavi/static/js/runtime~main.29db0d93.js.map",
     "static/css/2.266e55a5.chunk.css": "/starnavi/static/css/2.266e55a5.chunk.css",
-    "static/js/2.21c47bbe.chunk.js": "/starnavi/static/js/2.21c47bbe.chunk.js",
-    "static/js/2.21c47bbe.chunk.js.map": "/starnavi/static/js/2.21c47bbe.chunk.js.map",
+    "static/js/2.6d0b63b4.chunk.js": "/starnavi/static/js/2.6d0b63b4.chunk.js",
+    "static/js/2.6d0b63b4.chunk.js.map": "/starnavi/static/js/2.6d0b63b4.chunk.js.map",
     "index.html": "/starnavi/index.html",
-    "precache-manifest.053b0d67c79f86c80905d512a4353452.js": "/starnavi/precache-manifest.053b0d67c79f86c80905d512a4353452.js",
+    "precache-manifest.a4bdcd87525606dac77026a7def16d49.js": "/starnavi/precache-manifest.a4bdcd87525606dac77026a7def16d49.js",
     "service-worker.js": "/starnavi/service-worker.js",
     "static/css/2.266e55a5.chunk.css.map": "/starnavi/static/css/2.266e55a5.chunk.css.map",
     "static/css/main.d231dc96.chunk.css.map": "/starnavi/static/css/main.d231dc96.chunk.css.map"
